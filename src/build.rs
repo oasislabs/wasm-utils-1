@@ -14,6 +14,8 @@ use super::{
 use parity_wasm;
 use parity_wasm::elements;
 
+const MAX_PAGES: u32 = 65536 - 1;
+
 #[derive(Debug)]
 pub enum Error {
 	Encoding(elements::Error),
@@ -64,7 +66,7 @@ pub fn build(
 	runtime_type_version: Option<([u8; 4], u32)>,
 	public_api_entries: &[&str],
 	enforce_stack_adjustment: bool,
-	stack_size: u32,
+	stack_size: Option<u32>,
 	skip_optimization: bool,
 ) -> Result<(elements::Module, Option<elements::Module>), Error> {
 
@@ -73,16 +75,16 @@ pub fn build(
 	}
 
 	if let SourceTarget::Unknown = source_target {
-		// 49152 is 48kb!
 		if enforce_stack_adjustment {
+			let stack_size = stack_size.unwrap_or(49152);
 			assert!(stack_size <= 1024*1024);
 			let (new_module, new_stack_top) = shrink_unknown_stack(module, 1024 * 1024 - stack_size);
 			module = new_module;
 			let mut stack_top_page = new_stack_top / 65536;
 			if new_stack_top % 65536 > 0 { stack_top_page += 1 };
-			module = externalize_mem(module, Some(stack_top_page), 16);
+			module = externalize_mem(module, Some(stack_top_page), MAX_PAGES);
 		} else {
-			module = externalize_mem(module, None, 16);
+			module = externalize_mem(module, stack_size.map(|s| s / 65536), MAX_PAGES);
 		}
 	}
 

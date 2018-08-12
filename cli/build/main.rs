@@ -103,10 +103,10 @@ fn do_main() -> Result<(), Error> {
 			.help("Save intermediate raw bytecode to path")
 			.takes_value(true)
 			.long("save-raw"))
-		.arg(Arg::with_name("shrink_stack")
+		.arg(Arg::with_name("stack_size")
 			.help("Shrinks the new stack size for wasm32-unknown-unknown")
 			.takes_value(true)
-			.long("shrink-stack"))
+			.long("stack-size"))
 		.arg(Arg::with_name("public_api")
 			.help("Preserves specific imports in the library")
 			.takes_value(true)
@@ -164,8 +164,7 @@ fn do_main() -> Result<(), Error> {
 		runtime_type_version,
 		&public_api_entries,
 		matches.is_present("enforce_stack_adjustment"),
-		matches.value_of("shrink_stack").unwrap_or_else(|| "49152").parse()
-			.expect("New stack size is not valid u32"),
+		matches.value_of("stack_size").map(|v| v.parse().expect("New stack size is not valid u32")),
 		matches.is_present("skip_optimization"),
 	).map_err(Error::Build)?;
 

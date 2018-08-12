@@ -8,7 +8,7 @@ description = "Collection of command-line utilities and corresponding Rust api f
 keywords = ["wasm", "webassembly", "pwasm"]
 
 [dependencies]
-parity-wasm = { git = "https://github.com/ekiden/parity-wasm", tag = "v0.31.3-ekiden1" }
+parity-wasm = { git = "https://github.com/oasislabs/parity-wasm", branch = "ekiden" }
 log = { version = "0.4", default-features = false }
 byteorder = { version = "1", default-features = false }
 
