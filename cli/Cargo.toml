@@ -38,7 +38,7 @@ name = "wasm-check"
 path = "check/main.rs"
 
 [dependencies]
-parity-wasm = "0.31"
+parity-wasm = { git = "https://github.com/oasislabs/parity-wasm", branch = "ekiden" }
 pwasm-utils = { path = "..", version = "0.5" }
 glob = "0.2"
 clap = "2.24"
