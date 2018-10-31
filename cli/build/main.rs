@@ -164,7 +164,7 @@ fn do_main() -> Result<(), Error> {
 		runtime_type_version,
 		&public_api_entries,
 		matches.is_present("enforce_stack_adjustment"),
-		matches.value_of("stack_size").map(|v| v.parse().expect("New stack size is not valid u32")),
+		matches.value_of("max_mem").map(|v| v.parse().expect("New stack size is not valid u32")),
 		matches.is_present("skip_optimization"),
 	).map_err(Error::Build)?;
 
