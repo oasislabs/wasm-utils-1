@@ -4,6 +4,8 @@ version = "0.6.0"
 authors = ["Nikolay Volf <nikvolf@gmail.com>", "Sergey Pepyakin <s.pepyakin@gmail.com>", "Oasis Labs <info@oasislabs.com"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
+reposiory = "https://github.com/oasislabs/owasm-utils"
+homepage = "https://github.com/oasislabs/owasm-utils"
 description = "Collection of command-line utilities and corresponding Rust api for producing owasm-compatible executables"
 keywords = ["wasm", "webassembly", "owasm"]
 
