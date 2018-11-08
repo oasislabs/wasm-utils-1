@@ -1,6 +1,6 @@
 [package]
 name = "owasm-utils"
-version = "0.5.0"
+version = "0.6.0"
 authors = ["Nikolay Volf <nikvolf@gmail.com>", "Sergey Pepyakin <s.pepyakin@gmail.com>", "Oasis Labs <info@oasislabs.com"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
@@ -8,7 +8,7 @@ description = "Collection of command-line utilities and corresponding Rust api f
 keywords = ["wasm", "webassembly", "pwasm"]
 
 [dependencies]
-parity-wasm = { git = "https://github.com/oasislabs/parity-wasm", branch = "ekiden" }
+parity-wasm = { version = "0.31.3", default-features = false }
 log = { version = "0.4", default-features = false }
 byteorder = { version = "1", default-features = false }
 
