@@ -4,8 +4,8 @@ version = "0.6.0"
 authors = ["Nikolay Volf <nikvolf@gmail.com>", "Sergey Pepyakin <s.pepyakin@gmail.com>", "Oasis Labs <info@oasislabs.com"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
-description = "Collection of command-line utilities and corresponding Rust api for producing pwasm-compatible executables"
-keywords = ["wasm", "webassembly", "pwasm"]
+description = "Collection of command-line utilities and corresponding Rust api for producing owasm-compatible executables"
+keywords = ["wasm", "webassembly", "owasm"]
 
 [dependencies]
 parity-wasm = { version = "0.31.3", default-features = false }

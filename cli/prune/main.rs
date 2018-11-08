@@ -1,6 +1,6 @@
 extern crate parity_wasm;
-extern crate pwasm_utils as utils;
-extern crate pwasm_utils_cli as logger;
+extern crate owasm_utils as utils;
+extern crate owasm_utils_cli as logger;
 extern crate clap;
 
 use clap::{App, Arg};
@@ -8,7 +8,7 @@ use clap::{App, Arg};
 fn main() {
     logger::init_log();
 
-	let target_runtime = utils::TargetRuntime::pwasm();
+	let target_runtime = utils::TargetRuntime::owasm();
 
     let matches = App::new("wasm-prune")
                         .arg(Arg::with_name("input")

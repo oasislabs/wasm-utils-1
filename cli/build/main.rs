@@ -1,10 +1,10 @@
 //! Experimental build tool for cargo
 
 extern crate glob;
-extern crate pwasm_utils as utils;
+extern crate owasm_utils as utils;
 extern crate clap;
 extern crate parity_wasm;
-extern crate pwasm_utils_cli as logger;
+extern crate owasm_utils_cli as logger;
 
 mod source;
 
@@ -81,8 +81,8 @@ fn do_main() -> Result<(), Error> {
 			.help("What runtime we are compiling to")
 			.long("target-runtime")
 			.takes_value(true)
-			.default_value("pwasm")
-			.possible_values(&["substrate", "pwasm"]))
+			.default_value("owasm")
+			.possible_values(&["substrate", "owasm"]))
 		.arg(Arg::with_name("skip_optimization")
 			.help("Skip symbol optimization step producing final wasm")
 			.long("skip-optimization"))
@@ -165,7 +165,7 @@ fn do_main() -> Result<(), Error> {
 		.unwrap_or(Vec::new());
 
 	let target_runtime = match matches.value_of("target-runtime").expect("target-runtime has a default value; qed") {
-		"pwasm" => TargetRuntime::pwasm(),
+		"owasm" => TargetRuntime::owasm(),
 		"substrate" => TargetRuntime::substrate(),
 		_ => unreachable!("all possible values are enumerated in clap config; qed"),
 	};

@@ -234,7 +234,7 @@ mod test {
 
     #[test]
     fn no_data_section() {
-		let target_runtime = TargetRuntime::pwasm();
+		let target_runtime = TargetRuntime::owasm();
 
         test_packer(builder::module()
             .import()
@@ -283,7 +283,7 @@ mod test {
 
     #[test]
     fn with_data_section() {
-		let target_runtime = TargetRuntime::pwasm();
+		let target_runtime = TargetRuntime::owasm();
 
         test_packer(builder::module()
             .import()

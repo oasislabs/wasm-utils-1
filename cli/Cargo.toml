@@ -4,8 +4,8 @@ version = "0.6.0"
 authors = ["Nikolay Volf <nikvolf@gmail.com>", "Sergey Pepyakin <s.pepyakin@gmail.com>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"
-description = "Collection of command-line utilities and corresponding Rust api for producing pwasm-compatible executables"
-keywords = ["wasm", "webassembly", "pwasm"]
+description = "Collection of command-line utilities and corresponding Rust api for producing owasm-compatible executables"
+keywords = ["wasm", "webassembly", "owasm"]
 
 [lib]
 
@@ -38,7 +38,7 @@ name = "wasm-check"
 path = "check/main.rs"
 
 [dependencies]
-parity-wasm = { git = "https://github.com/oasislabs/parity-wasm", branch = "ekiden" }
+parity-wasm = { version = "0.31.3", default-features = false }
 owasm-utils = { path = "..", version = "0.6" }
 glob = "0.2"
 clap = "2.24"

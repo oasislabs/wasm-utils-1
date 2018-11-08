@@ -43,7 +43,7 @@ impl TargetRuntime {
 		}
 	}
 
-	pub fn pwasm() -> TargetRuntime {
+	pub fn owasm() -> TargetRuntime {
 		TargetRuntime {
 			create_symbol: "deploy",
 			call_symbol: "call",

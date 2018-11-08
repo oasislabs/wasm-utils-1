@@ -1,6 +1,6 @@
 extern crate parity_wasm;
-extern crate pwasm_utils as utils;
-extern crate pwasm_utils_cli as logger;
+extern crate owasm_utils as utils;
+extern crate owasm_utils_cli as logger;
 extern crate clap;
 
 use clap::{App, Arg};
@@ -8,7 +8,7 @@ use clap::{App, Arg};
 fn main() {
     logger::init_log();
 
-	let target_runtime = utils::TargetRuntime::pwasm();
+	let target_runtime = utils::TargetRuntime::owasm();
 
     let matches = App::new("wasm-pack")
                         .arg(Arg::with_name("input")
@@ -29,7 +29,7 @@ fn main() {
 	let raw_module = parity_wasm::serialize(module).expect("Serialization failed");
 
     // Invoke packer
-    let mut result_module = utils::pack_instance(raw_module, ctor_module, &utils::TargetRuntime::pwasm()).expect("Packing failed");
+    let mut result_module = utils::pack_instance(raw_module, ctor_module, &utils::TargetRuntime::owasm()).expect("Packing failed");
     // Optimize constructor, since it does not need everything
     utils::optimize(&mut result_module, vec![target_runtime.call_symbol]).expect("Optimization failed");
 

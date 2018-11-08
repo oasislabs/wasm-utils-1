@@ -1,5 +1,5 @@
 extern crate diff;
-extern crate pwasm_utils as utils;
+extern crate owasm_utils as utils;
 extern crate wabt;
 extern crate parity_wasm;
 
