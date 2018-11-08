@@ -1,10 +1,10 @@
 //! Experimental build tool for cargo
 
 extern crate glob;
-extern crate pwasm_utils as utils;
+extern crate owasm_utils as utils;
 extern crate clap;
 extern crate parity_wasm;
-extern crate pwasm_utils_cli as logger;
+extern crate owasm_utils_cli as logger;
 
 mod source;
 
@@ -81,8 +81,8 @@ fn do_main() -> Result<(), Error> {
 			.help("What runtime we are compiling to")
 			.long("target-runtime")
 			.takes_value(true)
-			.default_value("pwasm")
-			.possible_values(&["substrate", "pwasm"]))
+			.default_value("owasm")
+			.possible_values(&["substrate", "owasm"]))
 		.arg(Arg::with_name("skip_optimization")
 			.help("Skip symbol optimization step producing final wasm")
 			.long("skip-optimization"))
@@ -109,10 +109,10 @@ fn do_main() -> Result<(), Error> {
 			.help("Save intermediate raw bytecode to path")
 			.takes_value(true)
 			.long("save-raw"))
-		.arg(Arg::with_name("shrink_stack")
-			.help("Shrinks the new stack size for wasm32-unknown-unknown")
+		.arg(Arg::with_name("max_mem")
+			.help("The total amount of memory that can be allocated by the contract")
 			.takes_value(true)
-			.long("shrink-stack"))
+			.long("max-mem"))
 		.arg(Arg::with_name("public_api")
 			.help("Preserves specific imports in the library")
 			.takes_value(true)
@@ -165,7 +165,7 @@ fn do_main() -> Result<(), Error> {
 		.unwrap_or(Vec::new());
 
 	let target_runtime = match matches.value_of("target-runtime").expect("target-runtime has a default value; qed") {
-		"pwasm" => TargetRuntime::pwasm(),
+		"owasm" => TargetRuntime::owasm(),
 		"substrate" => TargetRuntime::substrate(),
 		_ => unreachable!("all possible values are enumerated in clap config; qed"),
 	};
@@ -176,8 +176,7 @@ fn do_main() -> Result<(), Error> {
 		runtime_type_version,
 		&public_api_entries,
 		matches.is_present("enforce_stack_adjustment"),
-		matches.value_of("shrink_stack").unwrap_or_else(|| "49152").parse()
-			.expect("New stack size is not valid u32"),
+		matches.value_of("max_mem").map(|v| v.parse().expect("New stack size is not valid u32")),
 		matches.is_present("skip_optimization"),
 		&target_runtime,
 	).map_err(Error::Build)?;
