@@ -6,7 +6,8 @@ license = "MIT/Apache-2.0"
 readme = "README.md"
 reposiory = "https://github.com/oasislabs/owasm-utils"
 homepage = "https://github.com/oasislabs/owasm-utils"
-description = "Collection of command-line utilities and corresponding Rust api for producing owasm-compatible executables"
+documentation = "https://docs.rs/owasm-utils"
+description = "Collection of command-line utilities and corresponding Rust API for producing owasm-compatible executables"
 keywords = ["wasm", "webassembly", "owasm"]
 
 [dependencies]
