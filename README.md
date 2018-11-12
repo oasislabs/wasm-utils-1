@@ -1,8 +1,15 @@
-# wasm-utils
+# owasm-utils
 
-[![Build Status](https://travis-ci.org/paritytech/wasm-utils.svg?branch=master)](https://travis-ci.org/paritytech/wasm-utils)
+Collection of WASM utilities used in Oasis and WASM contract development
 
-Collection of WASM utilities used in Parity and WASM contract development
+[Documentation](https://docs.rs/crate/owasm-utils)
+
+This crate is forked from [paritytech/wasm-utils](https://github.com/paritytech/wasm-utils).
+
+We are big fans of the work [Parity](https://www.parity.io/) is doing to advance the state of Ethereum and smart contract development. In order to further experiment with new features including new opcodes and gas models, we have forked these repositories.
+
+In the spirit of open-source, we intend to contribute bug fixes and new features upstream and will make our changes available to the community.
+
 
 ## Build tools for cargo
 
@@ -23,7 +30,7 @@ This will optimize WASM symbols tree to leave only those elements that are used 
 
 ## Gas counter (wasm-gas)
 
-For development puposes, raw WASM contract can be injected with gas counters (the same way as it done by Parity runtime when running contracts)
+For development puposes, raw WASM contract can be injected with gas counters (the same way as it done by Oasis runtime when running contracts)
 
 ```
 cargo install owasm-utils-cli --bin wasm-gas
@@ -32,7 +39,7 @@ wasm-gas <input_wasm_binary.wasm> <output_wasm_binary.wasm>
 
 ## Externalization (wasm-ext)
 
-Parity WASM runtime provides some library functions that can be commonly found in libc. WASM binary size can be reduced and performance may be improved if these functions are used. This utility scans for invocations of the following functions inside the WASM binary:
+Oasis WASM runtime provides some library functions that can be commonly found in libc. WASM binary size can be reduced and performance may be improved if these functions are used. This utility scans for invocations of the following functions inside the WASM binary:
 - `_malloc`,
 - `_free`,
 - `_memcpy`,
@@ -52,7 +59,7 @@ All executables use corresponding api methods of the root crate and can be combi
 
 # License
 
-`wasm-utils` is primarily distributed under the terms of both the MIT
+`owasm-utils` is primarily distributed under the terms of both the MIT
 license and the Apache License (Version 2.0), at your choice.
 
 See LICENSE-APACHE, and LICENSE-MIT for details.
@@ -60,5 +67,5 @@ See LICENSE-APACHE, and LICENSE-MIT for details.
 ## Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in `wasm-utils` by you, as defined in the Apache-2.0 license, shall be
+for inclusion in `owasm-utils` by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
