@@ -1,6 +1,6 @@
 # owasm-utils-cli
 
-Collection of WASM utilities used in Parity and WASM contract devepment
+Collection of WASM utilities used in Oasis and WASM contract devepment
 
 ## Install
 
