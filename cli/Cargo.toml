@@ -1,6 +1,6 @@
 [package]
 name = "owasm-utils-cli"
-version = "0.6.0"
+version = "0.6.1"
 authors = ["Nikolay Volf <nikvolf@gmail.com>", "Sergey Pepyakin <s.pepyakin@gmail.com>", "Oasis Labs <info@oasislabs.com>"]
 license = "MIT/Apache-2.0"
 repository = "https://github.com/oasislabs/owasm-utils"

@@ -8,7 +8,7 @@ extern crate owasm_utils_cli as logger;
 
 mod source;
 
-use std::{fs, io};
+use std::io;
 use std::path::PathBuf;
 
 use clap::{App, Arg};
@@ -37,13 +37,7 @@ impl std::fmt::Display for Error {
 	}
 }
 
-pub fn wasm_path(input: &source::SourceInput) -> String {
-	let mut path = PathBuf::from(input.target_dir());
-	path.push(format!("{}.wasm", input.final_name()));
-	path.to_string_lossy().to_string()
-}
-
-pub fn process_output(input: &source::SourceInput) -> Result<(), Error> {
+pub fn wasm_path(input: &source::SourceInput) -> PathBuf {
 	let mut cargo_path = PathBuf::from(input.target_dir());
 	let wasm_name = input.bin_name().to_string().replace("-", "_");
 	cargo_path.push(
@@ -54,15 +48,13 @@ pub fn process_output(input: &source::SourceInput) -> Result<(), Error> {
 	);
 	cargo_path.push("release");
 	cargo_path.push(format!("{}.wasm", wasm_name));
+	cargo_path
+}
 
+pub fn out_path(input: &source::SourceInput) -> PathBuf {
 	let mut target_path = PathBuf::from(input.target_dir());
 	target_path.push(format!("{}.wasm", input.final_name()));
-	fs::copy(cargo_path.as_path(), target_path.as_path())
-		.map_err(|io| Error::FailedToCopy(
-			format!("Failed to copy '{}' to '{}': {}", cargo_path.display(), target_path.display(), io)
-		))?;
-
-	Ok(())
+	target_path
 }
 
 fn do_main() -> Result<(), Error> {
@@ -138,12 +130,10 @@ fn do_main() -> Result<(), Error> {
 		source_input = source_input.with_final(final_name);
 	}
 
-	process_output(&source_input)?;
-
 	let path = wasm_path(&source_input);
 
 	let module = parity_wasm::deserialize_file(&path)
-		.map_err(|e| Error::Decoding(e, path.to_string()))?;
+		.map_err(|e| Error::Decoding(e, format!("{}", path.display())))?;
 
 	let runtime_type_version = if let (Some(runtime_type), Some(runtime_version))
 		 = (matches.value_of("runtime_type"), matches.value_of("runtime_version")) {
@@ -185,13 +175,14 @@ fn do_main() -> Result<(), Error> {
 		parity_wasm::serialize_to_file(save_raw_path, module.clone()).map_err(Error::Encoding)?;
 	}
 
+	let out_path = out_path(&source_input);
 	if let Some(ctor_module) = ctor_module {
 		parity_wasm::serialize_to_file(
-			&path,
+			&out_path,
 			ctor_module,
 		).map_err(Error::Encoding)?;
 	} else {
-		parity_wasm::serialize_to_file(&path, module).map_err(Error::Encoding)?;
+		parity_wasm::serialize_to_file(&out_path, module).map_err(Error::Encoding)?;
 	}
 
 	Ok(())
